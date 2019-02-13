@@ -7,11 +7,16 @@ namespace UnityExample.Services
 {
     public class GetFruitsStep : IWorkflowStep
     {
+        private readonly IFruitsRepository _fruitsRepository;
+
+        public GetFruitsStep(IFruitsRepository fruitsRepository)
+        {
+            _fruitsRepository = fruitsRepository;
+        }
+
         public bool Execute(IDictionary<string, object> parameters)
         {
             CustomLogger.Information("Get Fruits Step start");
-
-            IFruitsRepository _fruitsRepository = new CompanyFarmFruitRepository();
 
             CustomLogger.Information("Get Fruits Step Complete");
             return true;
