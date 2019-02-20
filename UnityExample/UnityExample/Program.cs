@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,16 +55,7 @@ namespace UnityExample
         private static IUnityContainer _Bootstrapper()
         {
             IUnityContainer container = new UnityContainer();
-            container.RegisterType<IFruitsRepository, CompanyFarmFruitRepository>("CompanyFarmFruitRepository");
-            container.RegisterType<IFruitsRepository, PrivateFarmFruitRepository>("PrivateFarmFruitRepository");
-            container.RegisterType<IFruitsRepository, StorageFruitRepository>("StorageFruitRepository");
-
-            container.RegisterType<IWorkflowStep, CallCarrierStep>("CallCarrierStep");
-            container.RegisterType<IWorkflowStep, GetFruitsStep>("GetFruitsStep", new InjectionConstructor(new ResolvedParameter<IFruitsRepository>("PrivateFarmFruitRepository")));
-            container.RegisterType<IWorkflowStep, PackageFruitsStep>("PackageFruitsStep");
-            container.RegisterType<IWorkflowStep, SendFruitsStep>("SendFruitsStep");
-            container.RegisterType<IWorkflowStep, UpdateStockStep>("UpdateStockStep", new InjectionConstructor(new ResolvedParameter<IFruitsRepository>("CompanyFarmFruitRepository")));
-            container.RegisterType<IWorkflowStep, VerifyFruitCountStep>("VerifyFruitCountStep");
+            container.LoadConfiguration();
             return container;
         }
     }
