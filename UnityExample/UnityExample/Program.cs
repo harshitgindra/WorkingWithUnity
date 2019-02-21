@@ -27,19 +27,8 @@ namespace UnityExample
 
                 var container = _Bootstrapper();
 
-                List<IWorkflowStep> steps = new List<IWorkflowStep>()
-                {
-                    container.Resolve<IWorkflowStep>("GetFruitsStep"),
-                    container.Resolve<IWorkflowStep>("VerifyFruitCountStep"),
-                    container.Resolve<IWorkflowStep>("PackageFruitsStep"),
-                    container.Resolve<IWorkflowStep>("SendFruitsStep"),
-                    container.Resolve<IWorkflowStep>("CallCarrierStep"),
-                    container.Resolve<IWorkflowStep>("UpdateStockStep"),
-                };
-
-                WorkflowManager mgr = new WorkflowManager();
-                bool returnValue = mgr.Initiate(steps, parameters);
-
+                IWorkflowManager mgr = container.Resolve<IWorkflowManager>("SimpleWorkflowManager");
+                bool returnValue = mgr.Initiate(parameters);
             }
             catch (Exception ex)
             {

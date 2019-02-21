@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
 using UnityExample.Common;
-using UnityExample.DAL;
 using UnityExample.Interfaces;
 
 namespace UnityExample.Services
 {
-    public class WorkflowManager
+    public class WorkflowManager: IWorkflowManager
     {
-        public bool Initiate(List<IWorkflowStep> steps, IDictionary<string, object> parameters)
+        private readonly IWorkflowStep[] _steps;
+
+        public WorkflowManager(IWorkflowStep[] steps)
+        {
+            _steps = steps;
+        }
+
+        public bool Initiate( IDictionary<string, object> parameters)
         {
             bool returnValue = false;
 
-            foreach (var step in steps)
+            foreach (var step in _steps)
             {
                 returnValue = step.Execute(parameters);
                 if (!returnValue)

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IFruitsRepository.cs" />
+    <Compile Include="IWorkflowManager.cs" />
     <Compile Include="IWorkflowStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
